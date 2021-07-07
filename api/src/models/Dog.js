@@ -8,5 +8,27 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    altura: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    peso: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    life: {
+      type: DataTypes.STRING,
+    },
+    raza: {
+      type: DataTypes.STRING
+    },
+    imagen: {
+      type: DataTypes.STRING
+    },
+    db: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   });
 };
