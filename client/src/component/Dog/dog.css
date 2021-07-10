@@ -1,0 +1,5 @@
+.dog{
+  display:grid;
+  grid-column-gap: 30px;
+  padding: 20px;
+}

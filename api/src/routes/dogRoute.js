@@ -19,7 +19,8 @@ const data = async () => {
         life: dog.life_span,
         raza: dog.breed_group,
         imagen: dog.image.url,
-        temperament: dog.temperament
+        temperament: dog.temperament,
+        bd: false
       }
   });
   //console.log("API DE DOGS",dogs);

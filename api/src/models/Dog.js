@@ -30,6 +30,11 @@ module.exports = (sequelize) => {
     },
     imagen: {
       type: DataTypes.STRING
+    },
+    bd: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
     }
   });
 };

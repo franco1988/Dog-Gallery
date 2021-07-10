@@ -2,6 +2,7 @@ import {GET_DOG, GET_DOG_NAME, GET_DOG_DETALLE, GET_TEMPERAMENT, CARGANDO} from 
 
 const initialState = {
   dogs: [],
+  dogNane: [],
   temperament: [],
   detail: {},
   cargando: false
@@ -17,7 +18,7 @@ export default function reducer(state = initialState, action){
   if(action.type === GET_DOG_NAME){
     return {
       ...state,
-      dogs: action.payload
+      dogName: action.payload
     }
   }
   if(action.type === GET_DOG_DETALLE){
