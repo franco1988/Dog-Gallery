@@ -17,7 +17,7 @@ export default function Detail(props){
   //console.log("DETALLE",detail)
   return (
     <div className="detalle">
-      { cargando? <h1>Cargando....</h1>:
+      { cargando? <h1>Loading....</h1>:
       <div>
         <div>
         {

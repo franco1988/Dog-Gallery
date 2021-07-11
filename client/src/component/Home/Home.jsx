@@ -2,6 +2,7 @@ import React, { useState,  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getDogName } from '../../action/index.js';
 import Dog from '../Dog/Dog.jsx';
+import './home.css';
 
 
 export default function Home(){
@@ -16,12 +17,15 @@ export default function Home(){
   const [search, setSearch] = useState("");
   const [ordenar, setOrdenar] = useState("");
   const [filter, setFilter] = useState("");
+
   console.log("DOGS", dogs)
   console.log("PERROS", perros)
+
   useEffect(() => {
     setPerros(dogs)
     console.log("1")
-  })
+  });
+
   useEffect(() => {
     console.log("2")
     if(search.length > 0){
@@ -77,43 +81,47 @@ export default function Home(){
   }
 
   return (
-    <div>
-      <div>
-        <input type="search" placeholder="Name...." onChange={e => setName(e.target.value)} />
-        <button onClick={() => setSearch(name)}>Search</button>
+    <div className="home">
+      <div className="option">
+        <div>
+          <input type="search" placeholder="Name...." onChange={e => setName(e.target.value)} />
+          <button onClick={() => setSearch(name)}>Search</button>
+        </div>
+        <div className="list">
+          <select onClick={e => setOrdenar(e.target.value)}>
+            <option value=" ">Sort dog breeds by:</option>
+            <option value="az">A - Z</option>
+            <option value="za">Z - A</option>
+            <option value="peso">Weight</option>
+          </select>
+        </div>
+        <div>
+          <select onClick={e => handleFilter(e)}>
+            <option value=" ">Filter by temperament:</option>
+            {
+              temperament? temperament.map(e => <option value={e.name}>{e.name}</option>)
+              : <option>Cargando...</option>
+            }
+          </select>
+        </div>
       </div>
-      <div className="list">
-        <select onClick={e => setOrdenar(e.target.value)}>
-          <option value=" ">Sort dog breeds by:</option>
-          <option value="az">A - Z</option>
-          <option value="za">Z - A</option>
-          <option value="peso">Weight</option>
-        </select>
-      </div>
-      <div>
-        <select onClick={e => handleFilter(e)}>
-          <option value=" ">Filter by temperament:</option>
+      <div className="cards">
+        <div className="dogs">
           {
-            temperament? temperament.map(e => <option value={e.name}>{e.name}</option>)
-            : <option>Cargando...</option>
+          perros.length? perros.slice(page * 9, page * 9 + 9).map((dog) => 
+            <Dog key={dog.id}
+            name={dog.name} imagen={dog.imagen} raza={dog.raza} altura={dog.altura} 
+            peso={dog.peso} temperamento={dog.temperament} id={dog.id} bd={dog.bd}/>
+            ) : <p>Loading....</p>
           }
-        </select>
-      </div>
-      <div className="games">
-        {
-        perros.length > 0? perros.slice(page * 8, page * 8 + 8).map((dog) => 
-          <Dog key={dog.id}
-          name={dog.name} imagen={dog.imagen} raza={dog.raza} altura={dog.altura} 
-          peso={dog.peso} temperamento={dog.temperament} id={dog.id} bd={dog.bd}/>
-          ) : <p>Cargando....</p>
-        }
-      </div>
-      <div className="list">
-        <button value="prev" onClick={handlePrev} 
-          disabled={page <= 0}>prev</button>
-        <p className="pagina" > {page + 1} </p>
-        <button value="next" onClick={handleNext} 
-          disabled={perros.slice(page * 8, page * 8 + 8).length < 8}>next</button>
+        </div>
+        <div className="paginado">
+          <button value="prev" onClick={handlePrev} 
+            disabled={page <= 0}>prev</button>
+          <p className="pagina" > {page + 1} </p>
+          <button value="next" onClick={handleNext} 
+            disabled={perros.slice(page * 9, page * 9 + 9).length < 9}>next</button>
+        </div>
       </div>
     </div>
   )

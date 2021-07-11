@@ -8,15 +8,15 @@ export default function Dog({id, name, temperamento, imagen,peso, bd}){
       <Link to={`/home/${id}`}>
         <img className="imagen" src={imagen} alt="not found imagen"/>
       </Link>
-        <div className="dog-body">
-          <h3>{name}</h3>
-          <p>{peso}</p>
-          <p>Temperamentos:</p>
-          {
-            bd? temperamento.map(temp => <p>{temp}</p>)
-            : (<p>{temperamento}</p>)
-          }
-        </div>
+      <div className="dog-body">
+        <h3>{name}</h3>
+        <p>{peso}</p>
+        <p>Temperaments:</p>
+        {
+          bd? temperamento.map(temp => <p>{temp}</p>)
+          : (<p>{temperamento}</p>)
+        }
+      </div>
     </div>
   )
 }

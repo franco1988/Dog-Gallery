@@ -1,5 +1,13 @@
 .dog{
   display:grid;
-  grid-column-gap: 30px;
-  padding: 20px;
+  align-content: center;
+  justify-content: center;
+  grid-template-rows: auto auto ;
+  padding: 10px;
+  background-color: rgb(51, 216, 29);
+}
+ 
+.imagen{
+  width: 280px;
+  height: 260px;
 }

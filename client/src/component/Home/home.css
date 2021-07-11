@@ -1,0 +1,42 @@
+.home{
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-gap: 20px;
+  padding: 10px;
+}
+
+.option{
+  display: grid;
+  grid-template-rows: 50px 30px 30px;
+  grid-gap: 10px;
+  padding: 2px;
+}
+
+.cards{
+  display: grid;
+  grid-template-rows: auto 30px;
+  grid-gap: 10px;
+  
+}
+
+.dogs{
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  grid-template-rows: auto auto auto;
+  grid-gap: 10px;
+ 
+}
+
+.paginado{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: 50px 20px 50px;
+  grid-gap: 5px;
+}
+
+.pagina{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
