@@ -1,6 +1,6 @@
 import React, { useState,  useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getDogName } from '../../action/index.js';
+import { getDogName, getDogAll } from '../../action/index.js';
 import Dog from '../Dog/Dog.jsx';
 import './home.css';
 
@@ -8,7 +8,6 @@ import './home.css';
 export default function Home(){
   const dispatch = useDispatch();
   const dogs = useSelector(state => state.dogs);
-  const dogName = useSelector(state => state.dogName);
   const temperament = useSelector(state => state.temperament);
 
   const [perros, setPerros] = useState([]);
@@ -19,25 +18,25 @@ export default function Home(){
   const [filter, setFilter] = useState("");
 
   console.log("DOGS", dogs)
+  console.log("TEMPERAMENT", temperament)
   console.log("PERROS", perros)
 
   useEffect(() => {
-    setPerros(dogs)
-    console.log("1")
-  });
-
-  useEffect(() => {
     console.log("2")
-    if(search.length > 0){
+    setPerros(dogs);
+  },[dogs])
+  
+  useEffect(() => {
+    console.log("1")
+    if(search){
       dispatch(getDogName(search));
-      setPerros(dogName);
-    }else {setPerros(dogs)}
+    } else {dispatch(getDogAll())}
   },[dispatch,search]);
 
   useEffect(() => {
     console.log("3")
-    let dog = [];
     setPage(0);
+    var dog = [];
     if(ordenar === "az"){
       dog = perros.sort((a, b) => {return a.name > b.name ? 1 : -1 });
       //console.log('az', dogs)
@@ -49,9 +48,6 @@ export default function Home(){
     if(ordenar === "peso"){
       dog = perros.sort((a, b) => b.peso - a.peso);
       //console.log('rating', game)
-    }
-    if(ordenar === " "){
-      dog = dogs;
     }
     setPerros([...dog])
   }, [ordenar]);
@@ -74,7 +70,7 @@ export default function Home(){
   }
 
   function handleNext(){
-    let pageMax = Math.ceil(dogs.length / 8 - 1);
+    let pageMax = Math.ceil(dogs.length / 9 - 1);
     if(pageMax < 0){return setPage(0)}
     if(page < pageMax){ return setPage(page + 1)}
     return setPage(pageMax);
@@ -108,7 +104,7 @@ export default function Home(){
       <div className="cards">
         <div className="dogs">
           {
-          perros.length? perros.slice(page * 9, page * 9 + 9).map((dog) => 
+          perros.length > 0? perros.slice(page * 9, page * 9 + 9).map((dog) => 
             <Dog key={dog.id}
             name={dog.name} imagen={dog.imagen} raza={dog.raza} altura={dog.altura} 
             peso={dog.peso} temperamento={dog.temperament} id={dog.id} bd={dog.bd}/>

@@ -64,6 +64,7 @@ router.get('/:id', async(req, res , next) => {
   const apiDogs = await data();
   try {
     var dog = apiDogs.filter(dog => (dog.id) === parseInt(idparams));
+    console.log("DOG", dog)
     if(!dog.length){
       dog = await Dog.findByPk(id, {include: Temperament});
       if(!dog.length){ return res.status(500).send("no hay dog")}

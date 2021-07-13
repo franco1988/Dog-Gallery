@@ -6,15 +6,17 @@ import rina from '../../imagenes/rina.jpg'
 
 export default function Detail(props){
   const dispatch = useDispatch();
-  let dogId = props.match.params.id;
-
-  let detail = useSelector(state => state.detail);
-  let cargando = useSelector(state => state.cargando);
+  const dogId = props.match.params.id;
+  console.log("DOGID", dogId)
 
   useEffect(() => {
     dispatch(getDogDetalle(dogId));
   },[dispatch, dogId]);
-  //console.log("DETALLE",detail)
+
+  const detail = useSelector(state => state.detail);
+  const cargando = useSelector(state => state.cargando);
+  console.log("DETALLE",detail)
+
   return (
     <div className="detalle">
       { cargando? <h1>Loading....</h1>:

@@ -8,6 +8,7 @@ export default function Landing(){
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("LANDING")
     dispatch(getDogAll());
     dispatch(getTemperament());
   },[dispatch])

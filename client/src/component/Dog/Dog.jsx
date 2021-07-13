@@ -5,7 +5,7 @@ import './dog.css';
 export default function Dog({id, name, temperamento, imagen,peso, bd}){
   return (
     <div className="dog">
-      <Link to={`/home/${id}`}>
+      <Link to={`/home/detail/${id}`}>
         <img className="imagen" src={imagen} alt="not found imagen"/>
       </Link>
       <div className="dog-body">
