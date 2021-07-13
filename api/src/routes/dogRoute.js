@@ -19,7 +19,7 @@ const data = async () => {
         life: dog.life_span,
         raza: dog.breed_group,
         imagen: dog.image.url,
-        temperament: dog.temperament,
+        temperaments: dog.temperament,
         bd: false
       }
   });
@@ -30,7 +30,8 @@ const data = async () => {
 router.get('/', async (req, res, next) => {
   const apiDogs = await data();
   //console.log("API DE DOGS",apiDogs);
-  const bdDogs = await Dog.findAll();
+  const bdDogs = await Dog.findAll({include: Temperament});
+  //console.log("BDDOGS", bdDogs)
   const dogsTotal = bdDogs.concat(apiDogs);
   const namedog = req.query.name;
   if(namedog){
@@ -63,13 +64,25 @@ router.get('/:id', async(req, res , next) => {
   console.log("ID", idparams)
   const apiDogs = await data();
   try {
-    var dog = apiDogs.filter(dog => (dog.id) === parseInt(idparams));
-    console.log("DOG", dog)
-    if(!dog.length){
-      dog = await Dog.findByPk(id, {include: Temperament});
+    let dog = await Dog.findByPk(idparams, {include: Temperament});
+    console.log("DOG ID BD", dog)
+    if(!dog){
+      dog = apiDogs.filter(dog => (dog.id) === parseInt(idparams));
+      console.log("DOG", dog)
       if(!dog.length){ return res.status(500).send("no hay dog")}
-      return res.json(dog);
+      return res.json({
+        id: dog[0].id,
+        name: dog[0].name,
+        altura: dog[0].altura,
+        peso: dog[0].peso,
+        raza: dog[0].raza,
+        life: dog[0].life,
+        temperaments: dog[0].temperament,
+        imagen: dog[0].imagen,
+        bd: dog[0].bd
+      });
     }
+    console.log("DOG ID BD", dog)
     return res.json(dog);
   } catch (error) {
     next(error);
@@ -77,9 +90,9 @@ router.get('/:id', async(req, res , next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const {name, altura, peso, life, temperament, raza} = req.body;
+  const {name, altura, peso, life, temperaments, raza} = req.body;
     
-    let tempCreate = temperament;
+    let tempCreate = temperaments;
     try {
         const dog = await Dog.create({
             name,

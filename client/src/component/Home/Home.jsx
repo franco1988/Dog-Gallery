@@ -30,39 +30,40 @@ export default function Home(){
     console.log("1")
     if(search){
       dispatch(getDogName(search));
+      setPage(0);
     } else {dispatch(getDogAll())}
   },[dispatch,search]);
 
   useEffect(() => {
     console.log("3")
     setPage(0);
-    var dog = [];
+    let dog = dogs;
     if(ordenar === "az"){
-      dog = perros.sort((a, b) => {return a.name > b.name ? 1 : -1 });
-      //console.log('az', dogs)
+      dog = dogs.sort((a, b) => {return a.raza > b.raza ? 1 : -1 });
+      console.log('AZ', dog)
     }
     if(ordenar === "za"){
-      dog = perros.sort((a, b) => { return a.name < b.name ? 1 : -1 });
-      //console.log('za', game)
+      dog = dogs.sort((a, b) => { return a.raza < b.raza ? 1 : -1 });
+      console.log('ZA', dog)
     }
     if(ordenar === "peso"){
-      dog = perros.sort((a, b) => b.peso - a.peso);
-      //console.log('rating', game)
+      dog = dogs.sort((a, b) => {return b.peso < a.peso? 1 : -1 });
+      console.log('PESO', dog)
     }
     setPerros([...dog])
   }, [ordenar]);
 
-  function handleFilter(e){
+  useEffect(() => {
     console.log("4")
-    setFilter(e.target.value);
     if(filter === " "){
       return setPerros(dogs);
     }
     let filtro = dogs.filter(e => {
-     return e.temperament === undefined? " " : e.temperament.includes(filter)? e : "";
+     return e.temperament === undefined? "" : e.temperament.split(", ").includes(filter)? e : "";
     });
+    console.log("FILTRO",filtro)
     setPerros(filtro);
-  }
+  },[filter])
 
   function handlePrev(){
     if(page > 0){return setPage(page - 1)}
@@ -84,19 +85,21 @@ export default function Home(){
           <button onClick={() => setSearch(name)}>Search</button>
         </div>
         <div className="list">
+          <label>Sort dog breeds by:</label>
           <select onClick={e => setOrdenar(e.target.value)}>
-            <option value=" ">Sort dog breeds by:</option>
+            <option value=" "></option>
             <option value="az">A - Z</option>
             <option value="za">Z - A</option>
             <option value="peso">Weight</option>
           </select>
         </div>
         <div>
-          <select onClick={e => handleFilter(e)}>
-            <option value=" ">Filter by temperament:</option>
+          <label>Filter by temperament:</label>
+          <select onClick={e => setFilter(e.target.value)}>
+            <option value=" "></option>
             {
               temperament? temperament.map(e => <option value={e.name}>{e.name}</option>)
-              : <option>Cargando...</option>
+              : <option>Loading...</option>
             }
           </select>
         </div>
@@ -107,7 +110,7 @@ export default function Home(){
           perros.length > 0? perros.slice(page * 9, page * 9 + 9).map((dog) => 
             <Dog key={dog.id}
             name={dog.name} imagen={dog.imagen} raza={dog.raza} altura={dog.altura} 
-            peso={dog.peso} temperamento={dog.temperament} id={dog.id} bd={dog.bd}/>
+            peso={dog.peso} temperaments={dog.temperaments} id={dog.id} bd={dog.bd}/>
             ) : <p>Loading....</p>
           }
         </div>

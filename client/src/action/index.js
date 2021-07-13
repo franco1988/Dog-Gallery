@@ -54,6 +54,6 @@ export const getTemperament = () => {
 
 export const postDog = (dog) => {
   return async () => {
-          await axios.post("http://localhost:3001/videogames", dog)
+          await axios.post("http://localhost:3001/dogs", dog)
   }
 }

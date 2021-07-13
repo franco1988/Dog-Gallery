@@ -1,0 +1,13 @@
+.detalle{
+  display:grid;
+  align-content: center;
+  justify-content: center;
+  grid-template-rows: auto auto ;
+  padding: 10px;
+  background-color: rgb(51, 216, 29);
+}
+ 
+.imagen2{
+  width: 280px;
+  height: 260px;
+}

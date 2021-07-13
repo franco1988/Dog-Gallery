@@ -32,10 +32,11 @@ router.get('/', async(req, res) => {
     }
     let array = lista.split(", ");
     console.log("ARRAY")
-    array = array.map(e => {
-      return {name: e}
+    array = array.map(async (e) => {
+      let [temp, create] = await Temperament.findOrCreate({where : { name: e}});
+      return temp
     })
-    await Temperament.bulkCreate(array);
+    
     
     hayTemp = await Temperament.findAll();
     console.log("HAY 2")
