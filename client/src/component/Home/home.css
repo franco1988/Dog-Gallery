@@ -7,24 +7,45 @@
 
 .option{
   display: grid;
-  grid-template-rows: 50px 50px 30px;
+  grid-template-rows: 90px 50px 30px;
   grid-gap: 10px;
   padding: 2px;
+  font-weight: bold;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: black;
+  text-shadow: 2px 2px 5px rgb(250, 247, 246), 0 0 25px white, 0 0 7px rgb(252, 252, 252);
 }
 
+.search{
+  display: grid;
+  grid-template-rows: 20px 30px 25px;
+  grid-gap: 5px;
+  font-weight: bold;
+}
+.botonS{
+  width: 70px;
+  font-weight: bold;
+}
+.botonS:hover{
+  background-color: orangered;
+  color:white;
+  border-radius:  5px;
+}
+select:hover{
+  background-color: orangered;
+  color:white;
+  border-radius:  5px;
+}
 .cards{
   display: grid;
   grid-template-rows: auto 30px;
   grid-gap: 10px;
-  
 }
-
 .dogs{
   display: grid;
   grid-template-columns: 300px 300px 300px;
   grid-template-rows: auto auto auto;
   grid-gap: 10px;
- 
 }
 
 .paginado{
@@ -34,7 +55,6 @@
   grid-template-columns: 50px 20px 50px;
   grid-gap: 5px;
 }
-
 .pagina{
   display: grid;
   align-items: center;

@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import {getDogDetalle} from '../../action/index.js';
-import rina from '../../imagenes/rina.jpg'
+import Rina from '../../imagenes/Rina.jpg'
+import Nila from '../../imagenes/Nila.jpg';
+import Pepe from '../../imagenes/Pepe.jpg';
 import gif from '../../imagenes/huellaPerro.gif';
 import './detail.css';
 
@@ -13,10 +15,21 @@ export default function Detail(props){
   useEffect(() => {
     dispatch(getDogDetalle(dogId));
   },[dispatch, dogId]);
-
+  
   const detail = useSelector(state => state.detail);
   const cargando = useSelector(state => state.cargando);
   console.log("DETALLE",detail)
+  
+  let foto;
+  if(detail.imagen === "Rina"){
+    foto = Rina;
+  } else {
+    if(detail.imagen === "Nila"){
+      foto = Nila;
+    }else {
+      foto = Pepe;
+    }
+  }
 
   return (
     <div className="detalle">
@@ -25,7 +38,7 @@ export default function Detail(props){
         <div key={detail.id}>
           <div>
           {
-            detail.bd? <img className="imagen2" src={rina} alt="not found imagen"/>
+            detail.bd? <img className="imagen2" src={foto} alt="not found imagen"/>
             : <img className="imagen2" src={detail.imagen} alt="not found imagen"/>
           }
           </div>

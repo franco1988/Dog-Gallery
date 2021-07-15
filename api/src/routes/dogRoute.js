@@ -90,13 +90,14 @@ router.get('/:id', async(req, res , next) => {
 
 router.post('/', async (req, res, next) => {
   const {name, altura, peso, life, temperaments, raza} = req.body;
-    
+    let imagen = name;
     let tempCreate = temperaments;
     try {
         const dog = await Dog.create({
             name,
             altura,
             peso,
+            imagen,
             life,
             raza
         });

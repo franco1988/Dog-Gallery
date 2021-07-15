@@ -58,9 +58,18 @@ export default function Home(){
     if(filter === " "){
       return setPerros(dogs);
     }
-    let filtro = dogs.filter(e => {
+    let filtroBD = dogs.filter(e => {
+      if(e.bd){
+        let array = e.temperaments.filter(t => t.name === filter);
+        if(array.length > 0){
+          return e;
+        }
+      }
+    })
+    let filtroApi = dogs.filter(e => {
      return e.temperaments === undefined? "" : e.temperaments.includes(filter)? e : "";
     });
+    let filtro = filtroBD.concat(filtroApi);
     console.log("FILTRO",filtro)
     setPerros(filtro);
   },[filter])
@@ -80,9 +89,10 @@ export default function Home(){
   return (
     <div className="home">
       <div className="option">
-        <div>
+        <div className="search">
+          <label>Search for name:</label>
           <input type="search" placeholder="Name...." onChange={e => setName(e.target.value)} />
-          <button onClick={() => setSearch(name)}>Search</button>
+          <button className="botonS" onClick={() => setSearch(name)}>Search</button>
         </div>
         <div className="list">
           <label>Sort dog breeds by:</label>
@@ -93,7 +103,7 @@ export default function Home(){
             <option value="peso">Weight</option>
           </select>
         </div>
-        <div>
+        <div className="filter">
           <label>Filter by temperament:</label>
           <select onClick={e => setFilter(e.target.value)}>
             <option value=" "></option>

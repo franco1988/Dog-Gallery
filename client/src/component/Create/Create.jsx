@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { postDog } from '../../action';
+import gif from '../../imagenes/huellaPerro.gif';
+import './create.css';
 
 export function validate(input){
   let error = {};
@@ -31,7 +33,6 @@ export default function Create(){
       ...input,
       [e.target.name]: e.target.value
     }));
-    
     setInput({
       ...input,
       [e.target.name]: e.target.value
@@ -40,12 +41,17 @@ export default function Create(){
   }
 
   function handleTemperaments(e){
+    setError(validate({
+      ...input,
+      temperaments: e.target.value
+    }));
     setInput({
       ...input,
       temperaments: [...input.temperaments, e.target.value]
     });
     console.log("SET TEMPERAMENT", input.temperaments)
   }
+
 
   function handleSubmit(e){
     e.preventDefault();
@@ -65,9 +71,11 @@ export default function Create(){
 
   return (
     <form id="form" className="form" onSubmit={handleSubmit}>
-      <h2>Create your pet</h2>
-      <div>
+      <div className="formCreate">
         <div>
+          <h2>Create your pet</h2>
+        </div>
+        <div className="fname">
           <label>Name:</label>
           <input type="text" name="name" value={input.name} placeholder="Name..."
             onChange={handleInput} className={error.name && 'danger'}/>
@@ -97,19 +105,22 @@ export default function Create(){
             onChange={handleInput} className={error.life && 'danger'}/>
             {error.life && (<p className="danger">{error.life}</p>)}
         </div>
-      </div>
-      <div>
-        <label>Temperament:</label>
-        {error.temperaments && (<p className="danger">{error.temperaments}</p>)}
-        <select onClick={e => handleTemperaments(e)}>
-          <option ></option>
-          {
-            temperament? temperament.map(e => <option value={e.name}>{e.name}</option>)
-            : <option>Loading...</option>
-          }
+        <div>
+          <label>Temperament:</label>
+          <select onClick={e => handleTemperaments(e)}>
+            <option ></option>
+            {
+              temperament? temperament.map(e => <option value={e.name}>{e.name}</option>)
+              : <option>Loading...</option>
+            }
           </select>
+            {error.temperaments && (<p className="danger">{error.temperaments}</p>)}
+        </div>
+        <input className="agregar" type="submit" value="Submit"/>
       </div>
-      <input className="agregar" type="submit" value="Submit"/>
+      <div className="huella1">
+        <img  src={gif} alt="huella" width="250" height="300"/>
+      </div>
     </form>
   )
 }
