@@ -7,7 +7,7 @@
 
 .option{
   display: grid;
-  grid-template-rows: 90px 50px 30px;
+  grid-template-rows: 90px 50px 80px 30px;
   grid-gap: 10px;
   padding: 2px;
   font-weight: bold;

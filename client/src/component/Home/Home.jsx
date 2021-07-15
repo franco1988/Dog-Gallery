@@ -10,12 +10,16 @@ export default function Home(){
   const dogs = useSelector(state => state.dogs);
   const temperament = useSelector(state => state.temperament);
 
+  var r = [...new Set(dogs.map(e => e.raza))];
+  const razas = r.filter(e => e !== "" && e !== undefined);
+
   const [perros, setPerros] = useState([]);
   const [page, setPage] = useState(0);
   const [name, setName] = useState("");
   const [search, setSearch] = useState("");
   const [ordenar, setOrdenar] = useState("");
   const [filter, setFilter] = useState("");
+  const [breed, setBreed] = useState("");
 
   console.log("DOGS", dogs)
   console.log("TEMPERAMENT", temperament)
@@ -38,6 +42,9 @@ export default function Home(){
     console.log("3")
     setPage(0);
     let dog = dogs;
+    if(ordenar === " "){
+      dog = dogs;
+    }
     if(ordenar === "az"){
       dog = dogs.sort((a, b) => {return a.raza > b.raza ? 1 : -1 });
       console.log('AZ', dog)
@@ -72,7 +79,15 @@ export default function Home(){
     let filtro = filtroBD.concat(filtroApi);
     console.log("FILTRO",filtro)
     setPerros(filtro);
-  },[filter])
+  },[filter]);
+
+  useEffect(() => {
+    if(breed === " "){
+      return setPerros(dogs);
+    }
+    let breedRaza = dogs.filter(e => e.raza === breed);
+    setPerros(breedRaza);
+  },[breed]);
 
   function handlePrev(){
     if(page > 0){return setPage(page - 1)}
@@ -104,11 +119,21 @@ export default function Home(){
           </select>
         </div>
         <div className="filter">
-          <label>Filter by temperament:</label>
+          <label>Filter by temperaments:</label>
           <select onClick={e => setFilter(e.target.value)}>
             <option value=" "></option>
             {
               temperament? temperament.map(e => <option value={e.name}>{e.name}</option>)
+              : <option>Loading...</option>
+            }
+          </select>
+        </div>
+        <div className="raza">
+          <label>Filter by breed:</label>
+          <select onClick={e => setBreed(e.target.value)}>
+            <option value=" "></option>
+            {
+              razas? razas.map(e => <option value={e}>{e}</option>)
               : <option>Loading...</option>
             }
           </select>
