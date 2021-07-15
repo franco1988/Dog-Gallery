@@ -64,12 +64,9 @@ router.get('/:id', async(req, res , next) => {
   console.log("ID", idparams)
   const apiDogs = await data();
   try {
-    let dog = await Dog.findByPk(idparams, {include: Temperament});
-    console.log("DOG ID BD", dog)
-    if(!dog){
-      dog = apiDogs.filter(dog => (dog.id) === parseInt(idparams));
+    if(!idparams.includes('-')){
+      let dog = apiDogs.filter(dog => (dog.id) === parseInt(idparams));
       console.log("DOG", dog)
-      if(!dog.length){ return res.status(500).send("no hay dog")}
       return res.json({
         id: dog[0].id,
         name: dog[0].name,
@@ -77,13 +74,15 @@ router.get('/:id', async(req, res , next) => {
         peso: dog[0].peso,
         raza: dog[0].raza,
         life: dog[0].life,
-        temperaments: dog[0].temperament,
+        temperaments: dog[0].temperaments,
         imagen: dog[0].imagen,
         bd: dog[0].bd
       });
+    } else {
+      let dog = await Dog.findByPk(idparams, {include: Temperament});
+      console.log("DOG ID BD", dog)
+      return res.json(dog);
     }
-    console.log("DOG ID BD", dog)
-    return res.json(dog);
   } catch (error) {
     next(error);
   }

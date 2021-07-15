@@ -2,7 +2,8 @@ import React, {useEffect} from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { getDogAll, getTemperament } from '../../action/index';
-import huella from '../../imagenes/huella.gif';
+import gif from '../../imagenes/huellaPerro.gif';
+import './landing.css';
 
 export default function Landing(){
   const dispatch = useDispatch();
@@ -14,11 +15,15 @@ export default function Landing(){
   },[dispatch])
 
   return (
-    <div>
-      <h1>MASCOTAS</h1>
-      <Link to="/home">
-        <img src={huella} alt="huella" width="300" height="350"/> 
-      </Link>
+    <div className="landing">
+      <div className="pets">
+        <h1>PET GALLERY</h1>
+      </div>
+      <div className="huella">
+        <Link to="/home">
+          <img  src={gif} alt="huella" width="250" height="300"/> 
+        </Link>
+      </div>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route} from 'react-router-dom';
-//import './App.css';
 import Landing from './component/Landing/Landing.jsx';
 import Home from './component/Home/Home.jsx';
 import Detail from './component/Detail/Detail.jsx';

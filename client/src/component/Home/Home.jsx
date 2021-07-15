@@ -59,7 +59,7 @@ export default function Home(){
       return setPerros(dogs);
     }
     let filtro = dogs.filter(e => {
-     return e.temperament === undefined? "" : e.temperament.split(", ").includes(filter)? e : "";
+     return e.temperaments === undefined? "" : e.temperaments.includes(filter)? e : "";
     });
     console.log("FILTRO",filtro)
     setPerros(filtro);

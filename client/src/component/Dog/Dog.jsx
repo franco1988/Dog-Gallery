@@ -13,9 +13,9 @@ export default function Dog({id, name, temperaments,raza, imagen,peso, bd}){
       }
       </Link>
       <div className="dog-body">
-        <h3>{name}</h3>
+        <h2 className="name">{name}</h2>
         <p>Weight: {peso} kg</p>
-        <p>Breed:{raza}</p>
+        <p>Breed: {raza}</p>
         <p>Temperaments:</p>
         <p>
         {

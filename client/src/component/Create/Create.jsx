@@ -8,6 +8,7 @@ export function validate(input){
   if(!input.altura){ error.altura = 'Please enter a height'}
   if(!input.peso){ error.peso = 'Please enter a weight'}
   if(!input.raza){ error.raza = 'Please enter a breed'}
+  if(!input.life){ error.life = 'Please enter a life span'}
   if(!input.temperaments.length){ error.temperaments = 'Please enter a temperament'}
   return error;
 }
@@ -21,6 +22,7 @@ export default function Create(){
     altura: '',
     peso: '',
     raza: '',
+    life: '',
     temperaments: []
   });
 
@@ -55,6 +57,7 @@ export default function Create(){
       altura: '',
       peso: '',
       raza: '',
+      life: '',
       temperaments: []
     });
     document.getElementById("form").reset();
@@ -87,6 +90,12 @@ export default function Create(){
           <input type="text" name="raza" value={input.raza} placeholder="Breed..."
             onChange={handleInput} className={error.raza && 'danger'}/>
             {error.raza && (<p className="danger">{error.raza}</p>)}
+        </div>
+        <div>
+          <label>Life span:</label>
+          <input type="text" name="life" value={input.life} placeholder="Life span..."
+            onChange={handleInput} className={error.life && 'danger'}/>
+            {error.life && (<p className="danger">{error.life}</p>)}
         </div>
       </div>
       <div>

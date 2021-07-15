@@ -2,12 +2,34 @@
   display:grid;
   align-content: center;
   justify-content: center;
-  grid-template-rows: auto auto ;
-  padding: 10px;
-  background-color: rgb(51, 216, 29);
+  grid-template-rows: 245px 200px ;
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
- 
+
+.dog-body{
+  display:grid;
+  justify-content:start;
+  grid-template-rows: 70px 25px 25px 25px 20px;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  color: black;
+  text-shadow: 2px 2px 5px rgb(250, 247, 246), 0 0 25px white, 0 0 7px rgb(252, 252, 252);
+}
+
 .imagen{
   width: 280px;
   height: 260px;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: white ;
+}
+
+.imagen:hover{
+  opacity: 0.3;
+}
+
+.name{
+  font-size: 25px;
 }
