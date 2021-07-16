@@ -1,6 +1,7 @@
 .landing{
   display:grid;
   grid-template-rows: 60px 50px ;
+  text-decoration: none;
 }
 
 body{
@@ -10,10 +11,11 @@ body{
 
 .pets{
   display:flex;
+  text-decoration: none;
   align-items: flex-start;
   margin-left: 30px;
   min-height: 100vh;
-  font-size: calc(20px + 2vmin);
+  font-size: calc(60px + 2vmin);
   font-style: oblique;
   font-weight: bold;
   color: rgb(248, 93, 3);

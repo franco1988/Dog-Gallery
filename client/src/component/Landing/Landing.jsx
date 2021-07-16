@@ -16,13 +16,13 @@ export default function Landing(){
 
   return (
     <div className="landing">
-      <div className="pets">
-        <h1>PET GALLERY</h1>
+      <div>
+        <Link to="/home">
+          <h1 className="pets">PET GALLERY</h1>
+        </Link>
       </div>
       <div className="huella">
-        <Link to="/home">
-          <img  src={gif} alt="huella" width="250" height="300"/> 
-        </Link>
+        <img  src={gif} alt="huella" width="250" height="300"/> 
       </div>
     </div>
   )
