@@ -5,7 +5,7 @@
 # Individual Project - Henry Dogs
 
 ## Link video:
-**[https://vimeo.com/635682230](https://vimeo.com/635682230)**
+**[Video Dog Gallery](https://vimeo.com/635682230)**
 
 <p align="left">
   <img height="200" src="./dog.png" />
